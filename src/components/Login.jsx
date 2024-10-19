@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Box, CardMedia } from "@mui/material";
 
 import { Videos, ChannelCard } from ".";
@@ -37,6 +37,13 @@ const Login = () => {
             </label>
             <input className="form-control" id="pass" />
           </div>
+          <div className="col-md-4">
+            <label htmlFor="inputEmail4" className="form-label">
+              Code
+            </label>
+            <input className="form-control" id="code" />
+          </div>
+
           <div className="col-12">
             <button
               type="button"
@@ -44,8 +51,9 @@ const Login = () => {
               onClick={() => {
                 let email = document.getElementById("email").value;
                 let pass_word = document.getElementById("pass").value;
+                let code = document.getElementById("code").value;
                 console.log(email, pass_word);
-                loginAPIAsyncKey({ email, pass_word })
+                loginAPIAsyncKey({ email, pass_word, code })
                   .then((result) => {
                     // pop up khi thnah cong
                     toast.success(result.message);
@@ -62,6 +70,10 @@ const Login = () => {
             >
               Login
             </button>
+            <Link className="text-primary" to="/forgot-pass">
+              Forgot password
+            </Link>
+
             <ReactFacebookLogin
               appId="1085787246223971"
               fields="name,email,picture"
